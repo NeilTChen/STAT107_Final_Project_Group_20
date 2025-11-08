@@ -19,14 +19,13 @@ source("00_requirements.R")
 
 # Data and Cleaning
 - The datasets are Regular Season.csv and Playoffs.csv. Cleaning and variable standardization are performed in the separate R Markdown file below.
-```{r}
+```{r child="11_DataCleaning.Rmd", echo=FALSE, warning=FALSE, message=FALSE}
 
-knitr::knit_child("11_DataCleaning.Rmd", quiet = TRUE)
 ```
 
 # Visualization
 - We include the visualization file that generates distribution histograms, paired box plots, and correlation scatter plots for FG percent. The functions used are defined in 02_funct_Plots.R and are invoked inside the visualization file.
-```{r child="31_DataVisualization.Rmd", echo=FALSE, warining=FALSE}
+```{r child="31_DataVisualization.Rmd", echo=FALSE, warning=FALSE, message=FALSE}
 
 
 ```
