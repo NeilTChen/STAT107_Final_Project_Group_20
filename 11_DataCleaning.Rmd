@@ -5,7 +5,7 @@ date: "2025-11-08"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup_cleaning, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 # Load all required packages
@@ -26,21 +26,30 @@ glimpse(playoffs)
 # Step 2: Keep only relevant columns
 ```{r}
 
-regular <- regular %>%
+regular_clean <- regular %>%
   select(Player, Team, GP, Min, PTS, FGM, FGA, `FG%`, `3PM/`, `3PA`, `3P%`)
 
-playoffs <- playoffs %>%
+playoffs_clean <- playoffs %>%
   select(Player, Team, GP, Min, PTS, FGM, FGA, `FG%`, `3PM/`, `3PA`, `3P%`)
 ```
 
 # STEP 3: Rename columns for consistency
 ```{r}
 
-names(regular) <- c("Player", "Team", "GP", "Minutes", "Points",
+names(regular_clean) <- c("Player", "Team", "GP", "Minutes", "Points",
                     "FGM", "FGA", "FG_percent", "TPM", "TPA", "TP_percent")
 
-names(playoffs) <- c("Player", "Team", "GP", "Minutes", "Points",
+names(playoffs_clean) <- c("Player", "Team", "GP", "Minutes", "Points",
                     "FGM", "FGA", "FG_percent", "TPM", "TPA", "TP_percent")
+```
+
+# STEP 4: Combine datasets
+```{r}
+combined <- dplyr::bind_rows(
+  dplyr::mutate(regular_clean, type = "Regular"),
+  dplyr::mutate(playoffs_clean, type = "Playoffs")
+)
+
 ```
 
 
