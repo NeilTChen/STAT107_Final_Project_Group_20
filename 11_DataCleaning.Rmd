@@ -1,0 +1,47 @@
+---
+title: "11_DataCleaning.Rmd"
+author: "STAT 107 Team 20"
+date: "2025-11-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Load all required packages
+source("00_requirements.R")
+```
+
+# STEP 1: Load datasets
+```{r}
+
+regular <- read_csv("Regular Season.csv")
+playoffs <- read_csv("playoffs.csv")
+
+# Check structure of both datasets
+glimpse(regular)
+glimpse(playoffs)
+```
+
+# Step 2: Keep only relevant columns
+```{r}
+
+regular <- regular %>%
+  select(Player, Team, GP, Min, PTS, FGM, FGA, `FG%`, `3PM/`, `3PA`, `3P%`)
+
+playoffs <- playoffs %>%
+  select(Player, Team, GP, Min, PTS, FGM, FGA, `FG%`, `3PM/`, `3PA`, `3P%`)
+```
+
+# STEP 3: Rename columns for consistency
+```{r}
+
+names(regular) <- c("Player", "Team", "GP", "Minutes", "Points",
+                    "FGM", "FGA", "FG_percent", "TPM", "TPA", "TP_percent")
+
+names(playoffs) <- c("Player", "Team", "GP", "Minutes", "Points",
+                    "FGM", "FGA", "FG_percent", "TPM", "TPA", "TP_percent")
+```
+
+
+
