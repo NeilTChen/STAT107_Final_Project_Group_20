@@ -14,7 +14,7 @@ packages <- c("tidyverse",  # includes dplyr, ggplot2, readr, tidyr, etc.
 
 # check which packages are already installed
 # rownames(installed.packages()) returns the names of installed packages
-installed <- packeges %in% rownames(installed.packages())
+installed <- packages %in% rownames(installed.packages())
 
 # install any missing packages
 if (any(!installed)) {
@@ -24,3 +24,4 @@ if (any(!installed)) {
 # load all required packages
 #character.only = TRUE allows using package names stored as strings
 lapply(packages, library, character.only = TRUE)
+
