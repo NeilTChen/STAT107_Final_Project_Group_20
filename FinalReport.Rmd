@@ -1,0 +1,55 @@
+---
+title: "Regular Season vs Playoffs: Shooting Efficiency Analysis"
+author: "STAT 107 Team 20"
+date: "2025-11-08"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+
+source("00_requirements.R")
+```
+
+# Abstract
+- This report examines whether NBA players’ shooting efficiency changes between the regular season and the playoffs. Using player level data from the Oklahoma City Thunder, we focus on field goal percentage and three point percentage. We rely on a dedicated cleaning file to standardize variables and on a visualization file to produce distribution, paired comparison, and correlation plots. Preliminary visuals suggest modest declines in playoff efficiency. In the final phase we will run paired tests and report effect sizes with confidence intervals.
+
+# Introduction
+- Playoffs often feature stronger defenses and higher pressure. These conditions may affect shooting outcomes. We ask whether field goal percentage and three point percentage differ between the two stages for the same players and whether regular season performance correlates with playoff performance.
+
+# Data and Cleaning
+- The datasets are Regular Season.csv and Playoffs.csv. Cleaning and variable standardization are performed in the separate R Markdown file below.
+```{r}
+
+knitr::knit_child("11_DataCleaning.Rmd", quiet = TRUE)
+```
+
+# Visualization
+- We include the visualization file that generates distribution histograms, paired box plots, and correlation scatter plots for FG percent. The functions used are defined in 02_funct_Plots.R and are invoked inside the visualization file.
+```{r child="31_DataVisualization.Rmd", echo=FALSE, warining=FALSE}
+
+
+```
+
+# Summary Statistics
+- The table below summarizes group level statistics by stage to complement the visualizations.
+```{r}
+
+
+desc <- combined %>%
+  dplyr::group_by(type) %>%
+  dplyr::summarise(
+    players_n = dplyr::n(),
+    FG_mean = mean(FG_percent, na.rm = TRUE),
+    FG_sd = sd(FG_percent, na.rm = TRUE),
+    TP_mean = mean(TP_percent, na.rm = TRUE),
+    TP_sd = sd(TP_percent, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+knitr::kable(desc, caption = "Summary statistics for FG% and 3P% by stage")
+```
+
+
+
+
