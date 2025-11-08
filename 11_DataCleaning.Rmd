@@ -16,7 +16,7 @@ source("00_requirements.R")
 ```{r}
 
 regular <- read_csv("Regular Season.csv")
-playoffs <- read_csv("playoffs.csv")
+playoffs <- read_csv("Playoffs.csv")
 
 # Check structure of both datasets
 glimpse(regular)
@@ -42,6 +42,7 @@ names(regular) <- c("Player", "Team", "GP", "Minutes", "Points",
 names(playoffs) <- c("Player", "Team", "GP", "Minutes", "Points",
                     "FGM", "FGA", "FG_percent", "TPM", "TPA", "TP_percent")
 ```
+
 
 
 
