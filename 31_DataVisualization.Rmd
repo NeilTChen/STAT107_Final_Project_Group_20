@@ -1,0 +1,86 @@
+---
+title: "31_Data_Visualization"
+author: "Group 20"
+date: "2025-11-07"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+source("00_requirements.R")
+source("02_funct_Plots.R")
+```
+
+## Processing
+
+```{r data-processing}
+# 1. Load datasets
+regular <- read_csv("Regular Season.csv")
+playoffs <- read_csv("Playoffs.csv")
+
+# 2. Keep only relevant columns
+regular_clean <- regular %>%
+  select(Player, Team, GP, Min, PTS, FGM, FGA, `FG%`, `3PM/`, `3PA`, `3P%`)
+
+playoffs_clean <- playoffs %>%
+  select(Player, Team, GP, Min, PTS, FGM, FGA, `FG%`, `3PM/`, `3PA`, `3P%`)
+
+# 3. Rename columns for consistency
+names(regular_clean) <- c("Player", "Team", "GP", "Minutes", "Points",
+                          "FGM", "FGA", "FG_percent", "TPM", "TPA", "TP_percent")
+
+names(playoffs_clean) <- c("Player", "Team", "GP", "Minutes", "Points",
+                           "FGM", "FGA", "FG_percent", "TPM", "TPA", "TP_percent")
+
+# 4. Process: Create a paired dataset
+# We use an inner_join to keep only players who appear in BOTH datasets
+paired_stats <- inner_join(
+  regular_clean, 
+  playoffs_clean, 
+  by = "Player", 
+  suffix = c("_reg", "_playoff")
+)
+
+# Glimpse the final paired data
+glimpse(paired_stats)
+```
+
+## Distribution of Shooting Efficiency
+
+```{r plot-histograms}
+plot_distribution_histograms(
+  regular_df = regular_clean,
+  playoff_df = playoffs_clean,
+  metric_col = "FG_percent",
+  plot_title_prefix = "Field Goal %",
+  bin_width = 2
+)
+```
+
+## Paired Comparison of Performance
+
+```{r plot-paired-boxplot}
+plot_paired_boxplot(
+  paired_df = paired_stats,
+  col_reg = "FG_percent_reg",
+  col_playoff = "FG_percent_playoff",
+  plot_title = "Paired Comparison of Player FG% (Regular Season vs. Playoffs)",
+  y_label = "Field Goal Percentage"
+)
+```
+
+## Correlation of Performance
+
+```{r plot-scatter}
+plot_correlation_scatter(
+  paired_df = paired_stats,
+  col_reg = "FG_percent_reg",
+  col_playoff = "FG_percent_playoff",
+  plot_title = "Playoff FG% vs. Regular Season FG%",
+  x_label = "Regular Season FG%",
+  y_label = "Playoff FG%"
+)
+```
