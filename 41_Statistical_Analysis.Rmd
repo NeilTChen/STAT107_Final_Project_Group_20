@@ -55,11 +55,29 @@ df_comparison <- df_reg_team %>%
 
 assign("df_comparison", df_comparison, envir = .GlobalEnv)
 
-# Prepare data for testing
+# Cohen's d Calculation
+# Define a function to calculate Cohen's d for two independent samples
+cohen_d_independent <- function(group1, group2) {
+  n1 <- length(group1)
+  n2 <- length(group2)
+  m1 <- mean(group1, na.rm = TRUE)
+  m2 <- mean(group2, na.rm = TRUE)
+  s1 <- sd(group1, na.rm = TRUE)
+  s2 <- sd(group2, na.rm = TRUE)
+  
+  # Pooled Standard Deviation
+  sp <- sqrt(((n1 - 1) * s1^2 + (n2 - 1) * s2^2) / (n1 + n2 - 2))
+  
+  # Cohen's d
+  d <- (m1 - m2) / sp
+  return(d)
+}
 
+# Prepare data for testing
 # Separate the data into two groups for FG%
 fg_playoff <- df_comparison %>% filter(Team_Status == "Playoff") %>% pull(FG_percent_team)
 fg_non_playoff <- df_comparison %>% filter(Team_Status == "Non-Playoff") %>% pull(FG_percent_team)
+
 
 # Separate the data into two groups for 3P%
 tp_playoff <- df_comparison %>% filter(Team_Status == "Playoff") %>% pull(TP_percent_team)
@@ -70,23 +88,24 @@ tp_non_playoff <- df_comparison %>% filter(Team_Status == "Non-Playoff") %>% pul
 # T-test for Field Goal Percentage (FG%) 
 # We use var.equal = FALSE for Welch's t-test, which assumes unequal variances.
 t_test_fg <- t.test(fg_playoff, fg_non_playoff, var.equal = FALSE)
+cohen_d_fg <- cohen_d_independent(fg_playoff, fg_non_playoff)
 
 # T-test for Three Point Percentage (3P%)
 t_test_tp <- t.test(tp_playoff, tp_non_playoff, var.equal = FALSE)
-
-assign("t_test_fg_team", t_test_fg, envir = .GlobalEnv)
-assign("t_test_tp_team", t_test_tp, envir = .GlobalEnv)
+cohen_d_tp <- cohen_d_independent(tp_playoff, tp_non_playoff)
 
 # Print Results
-
 cat("--- Field Goal Percentage (FG%) Comparison ---\n")
 cat("Playoff Mean (N=", length(fg_playoff), "): ", round(mean(fg_playoff), 2), "%\n", sep="")
 cat("Non-Playoff Mean (N=", length(fg_non_playoff), "): ", round(mean(fg_non_playoff), 2), "%\n", sep="")
 print(t_test_fg)
-cat("\n")
+cat("Cohen's d: ", round(cohen_d_fg, 3), "\n\n")
 
 cat("--- Three Point Percentage (3P%) Comparison ---\n")
 cat("Playoff Mean (N=", length(tp_playoff), "): ", round(mean(tp_playoff), 2), "%\n", sep="")
 cat("Non-Playoff Mean (N=", length(tp_non_playoff), "): ", round(mean(tp_non_playoff), 2), "%\n", sep="")
 print(t_test_tp)
+cat("Cohen's d: ", round(cohen_d_tp, 3), "\n")
+
+write_csv(df_comparison, "team_accuracy_comparison_R.csv")
 ```

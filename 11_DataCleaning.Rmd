@@ -2,7 +2,9 @@
 title: "11_DataCleaning.Rmd"
 author: "STAT 107 Team 20"
 date: "2025-11-08"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup_cleaning, include=FALSE}

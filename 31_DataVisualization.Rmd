@@ -20,6 +20,7 @@ source("02_funct_Plots.R")
 # 1. Load datasets
 regular <- read_csv("Regular Season.csv")
 playoffs <- read_csv("Playoffs.csv")
+accuracy_comparison <- read_csv("team_accuracy_comparison_R.csv")
 
 # 2. Keep only relevant columns
 regular_clean <- regular %>%
@@ -36,7 +37,7 @@ names(playoffs_clean) <- c("Player", "Team", "GP", "Minutes", "Points",
                            "FGM", "FGA", "FG_percent", "TPM", "TPA", "TP_percent")
 
 # 4. Process: Create a paired dataset
-# We use an inner_join to keep only players who appear in BOTH datasets
+# We use an inner_join to keep only players who appear in z` datasets
 paired_stats <- inner_join(
   regular_clean, 
   playoffs_clean, 
@@ -83,4 +84,64 @@ plot_correlation_scatter(
   x_label = "Regular Season FG%",
   y_label = "Playoff FG%"
 )
+```
+
+```{r box}
+# Box Plot for Field Goal Percentage by Team Status
+# Compares the distribution of FG% between Playoff and Non-Playoff teams.
+plot_fg_boxplot <- ggplot(accuracy_comparison,
+                          aes(x = Team_Status, y = FG_percent_team, fill = Team_Status)) +
+  geom_boxplot(alpha = 0.7) +
+  # Add individual points (jitter) for visual clarity
+  geom_jitter(color = "black", size = 2.5, width = 0.2, alpha = 0.6) +
+  labs(
+    title = "Team Field Goal Percentage Comparison (Playoff vs. Non-Playoff)",
+    x = "Team Status",
+    y = "Field Goal Percentage (%)"
+  ) +
+  theme_minimal() +
+  # Use custom colors for distinct categories
+  scale_fill_manual(values = c("Playoff" = "#00BFC4", "Non-Playoff" = "#F8766D"))
+
+print(plot_fg_boxplot)
+```
+
+```{r}
+# Box Plot for Three-Point Percentage by Team Status
+# Compares the distribution of TP% between Playoff and Non-Playoff teams.
+plot_tp_boxplot <- ggplot(accuracy_comparison,
+                          aes(x = Team_Status, y = TP_percent_team, fill = Team_Status)) +
+  geom_boxplot(alpha = 0.7) +
+  # Add individual points (jitter) for visual clarity
+  geom_jitter(color = "black", size = 2.5, width = 0.2, alpha = 0.6) +
+  labs(
+    title = "Team Three-Point Percentage Comparison (Playoff vs. Non-Playoff)",
+    x = "Team Status",
+    y = "Three-Point Percentage (%)"
+  ) +
+  theme_minimal() +
+  scale_fill_manual(values = c("Playoff" = "#00BFC4", "Non-Playoff" = "#F8766D"))
+
+print(plot_tp_boxplot)
+```
+
+```{r scatter}
+# Scatter Plot of TP% vs. FG% with Team Labels
+# Shows the correlation between the two metrics, colored by team status.
+plot_scatter <- ggplot(accuracy_comparison,
+                       aes(x = FG_percent_team, y = TP_percent_team, color = Team_Status)) +
+  geom_point(size = 4, alpha = 0.8) +
+  # Add team names as labels
+  geom_text(aes(label = Team), vjust = -1, size = 3, check_overlap = TRUE) +
+  # Add a linear regression line to show correlation
+  geom_smooth(method = "lm", se = FALSE, color = "gray30", linetype = "dashed") +
+  labs(
+    title = "Three-Point Percentage vs. Field Goal Percentage by Team Status",
+    x = "Team Field Goal Percentage (%)",
+    y = "Team Three-Point Percentage (%)",
+    color = "Team Status"
+  ) +
+  theme_minimal()
+
+print(plot_scatter)
 ```
