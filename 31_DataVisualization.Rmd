@@ -59,6 +59,8 @@ plot_distribution_histograms(
   plot_title_prefix = "Field Goal %",
   bin_width = 2
 )
+
+ggsave("fg_distribution_histograms.png", width = 10, height = 6)
 ```
 
 ## Paired Comparison of Performance
@@ -71,6 +73,8 @@ plot_paired_boxplot(
   plot_title = "Paired Comparison of Player FG% (Regular Season vs. Playoffs)",
   y_label = "Field Goal Percentage"
 )
+
+ggsave("paired_fg_boxplot.png", width = 8, height = 6)
 ```
 
 ## Correlation of Performance
@@ -84,6 +88,8 @@ plot_correlation_scatter(
   x_label = "Regular Season FG%",
   y_label = "Playoff FG%"
 )
+
+ggsave("fg_correlation_scatter.png", width = 8, height = 6)
 ```
 
 ```{r box}
@@ -104,6 +110,8 @@ plot_fg_boxplot <- ggplot(accuracy_comparison,
   scale_fill_manual(values = c("Playoff" = "#00BFC4", "Non-Playoff" = "#F8766D"))
 
 print(plot_fg_boxplot)
+
+ggsave("team_fg_percent_boxplot.png", plot = plot_fg_boxplot, width = 7, height = 5)
 ```
 
 ```{r}
@@ -123,6 +131,8 @@ plot_tp_boxplot <- ggplot(accuracy_comparison,
   scale_fill_manual(values = c("Playoff" = "#00BFC4", "Non-Playoff" = "#F8766D"))
 
 print(plot_tp_boxplot)
+
+ggsave("team_tp_percent_boxplot.png", plot = plot_tp_boxplot, width = 7, height = 5)
 ```
 
 ```{r scatter}
@@ -144,4 +154,6 @@ plot_scatter <- ggplot(accuracy_comparison,
   theme_minimal()
 
 print(plot_scatter)
+
+ggsave("team_fg_vs_tp_scatter.png", plot = plot_scatter, width = 9, height = 6)
 ```
