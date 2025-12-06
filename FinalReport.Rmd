@@ -66,4 +66,4 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
 
 - Neil Chen: Wrote the 02_funct_Plots.R, 31_DataVisualization.Rmd, and 41_Statistical_Analysis.Rmd files, the report submitted for the Half-Way Project Evaluation, and gathering the data for the project. I also contributed to the final report. 
 
-- Allen Weng: Contributed to the final report and interpreted the data. Suggested the topic for the project. Also made corrections where needde and consistently updating the files.
+- Allen Weng: Contributed to the final report and interpreted the data. Suggested the topic for the project. Also made corrections where needed and consistently updating the files.
