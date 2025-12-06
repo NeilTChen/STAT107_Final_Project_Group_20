@@ -34,24 +34,10 @@ source("00_requirements.R")
 - Correlation of Performance. Finally, we produced a scatterplot that compares each player’s regular-season field-goal percentage to their playoff field-goal percentage. Each point represents one player, showing both values together. This plot helps reveal whether players who shoot well in the regular season also tend to shoot well in the playoffs, and how consistent shooting performance is across the two contexts.
 
 # Summary Statistics
-- The table below summarizes group level statistics (mean and standard deviation) for FG% and 3P% across both stages. These statistics are based on the combined dataset that was created and prepared in the 11_DataCleaning.Rmd file.
-```{r summary-stats, message=FALSE, warning=FALSE}
+- Group players by stage: We first organized the combined dataset by stage, separating players’ statistics into two groups: regular season and playoffs. This grouping allows us to compute summary statistics for each stage separately, rather than mixing all players together.
+- Calculate summary statistics: For each group, we calculated the following: The total number of players included (players_n), the average field-goal percentage (FG_mean) and its standard deviation (FG_sd), the average three-point percentage (TP_mean) and its standard deviation (TP_sd), these measures provide a concise overview of shooting performance and variability for each stage.
+- Display results in a table: Finally, the summary statistics were presented in a formatted table within the report. This table allows us to quickly compare overall shooting efficiency and variability between the regular season and playoffs, making it easy to see whether shooting tends to improve, decline, or remain consistent across stages.
 
-# Compute and summarize overall FG% and 3P% by stage
-desc <- combined %>%
-  dplyr::group_by(type) %>% # Group by stage (Regular or Playoffs)
-  dplyr::summarise(
-    players_n = dplyr::n(),
-    FG_mean = mean(FG_percent, na.rm = TRUE),
-    FG_sd = sd(FG_percent, na.rm = TRUE),
-    TP_mean = mean(TP_percent, na.rm = TRUE),
-    TP_sd = sd(TP_percent, na.rm = TRUE),
-    .groups = "drop"
-  )
-
-# Display results as a formatted table in the report
-knitr::kable(desc, caption = "Summary statistics for FG% and 3P% by stage")
-```
 
 
 
