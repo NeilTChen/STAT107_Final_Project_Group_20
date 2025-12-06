@@ -60,6 +60,10 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
 - Calculate summary statistics: For each group, we calculated the following: The total number of players included (players_n), the average field-goal percentage (FG_mean) and its standard deviation (FG_sd), the average three-point percentage (TP_mean) and its standard deviation (TP_sd), these measures provide a concise overview of shooting performance and variability for each stage.
 - Display results in a table: Finally, the summary statistics were presented in a formatted table within the report. This table allows us to quickly compare overall shooting efficiency and variability between the regular season and playoffs, making it easy to see whether shooting tends to improve, decline, or remain consistent across stages.
 
+# Conclusion
+- From our project, we have discovered many things. The pressure of being in the playoffs is insanely heavy, getting to even the most seasoned of players. This is shown through our analyses, seeing that players tend to have a lower upper quartile in the playoffs compared to during the regular season. We also observe the importance of field goal and three point efficiency for getting into the playoffs in the first place. Field goal percentage seems to be more important than three point percentage for making the playoffs, as shown by the Cohen's d value. The plots we included in our report help to visualize the impacts of each variable. 
+- In the future, I would like to continue to explore the many factors that lead to a team making the playoffs, including other variables such as free throws and injuries. There are many other factors to account for in such a complex game. 
+
 # GitHub Link
 https://github.com/NeilTChen/STAT107_Final_Project_Group_20
 
