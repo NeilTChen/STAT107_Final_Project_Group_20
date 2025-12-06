@@ -63,4 +63,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
 # Team Contributions
 - Seonghee Seo: Contributed to the 00_requirements.R and 11_DataCleaning.Rmd files, the report submitted for the Half-Way Project Evaluation, and the final README file. Also reviewed the project files for typos and wording issues and made corrections where needed.
 
+
 - Neil Chen: Wrote the 02_funct_Plots.R, 31_DataVisualization.Rmd, and 41_Statistical_Analysis.Rmd files, the report submitted for the Half-Way Project Evaluation, and gathering the data for the project. I also contributed to the final report. 
+
+- Allen Weng: Contributed to the final report and interpreted the data. Suggested the topic for the project. Also made corrections where needde and consistently updating the files.
