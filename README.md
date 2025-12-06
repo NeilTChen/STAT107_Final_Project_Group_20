@@ -5,8 +5,13 @@ Our final project for STAT 107. We are exploring the differences in three pointe
 
 This project analyzes differences in shooting efficiency at both the player and team levels using NBA league-wide datasets for the regular season and playoffs.
 
-00_requirements.R: sets up the packages we will be using for the project
 
-Regular Season.csv: NBA data we will be using for our project. Includes players' field goal and three point attempts, scored, and percentage.
+__Regular Season.csv:__
+- Contains player-level NBA regular-season statistics, including field goals (FGM, FGA, FG%), three-point shooting (3PM, 3PA, 3P%), minutes, points, team, and player names.
 
-Playoffs.csv: NBA data we will be using for our project. Includes players' field goal and three point attempts, scored, and percentage. 
+__Playoffs.csv:__
+- Contains player-level NBA playoff statistics with the same variables as the regular-season file, including field goals (FGM, FGA, FG%), three-point shooting (3PM, 3PA, 3P%), minutes, points, team, and player names.
+
+__00_requirements.R:__
+- Installs missing packages and loads all libraries needed for the project (tidyverse, ggpubr, broom, knitr).
+- This file must be sourced before running any other scripts.
