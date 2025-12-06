@@ -15,7 +15,7 @@ source("00_requirements.R")
 ```
 
 # Abstract
-- This report examines whether NBA players’ shooting efficiency changes between the regular season and the playoffs. Using player level data from the Oklahoma City Thunder, we focus on field goal percentage and three point percentage. We rely on a dedicated cleaning file to standardize variables and on a visualization file to produce distribution, paired comparison, and correlation plots. Preliminary visuals suggest modest declines in playoff efficiency. In the final phase we will run paired tests and report effect sizes with confidence intervals.
+- This report examines whether NBA players’ shooting efficiency changes between the regular season and the playoffs. Using league-wide player-level data, we focus on field goal percentage and three-point percentage. We rely on a dedicated cleaning file to standardize variables and on a visualization file to produce distribution, paired comparison, and correlation plots. Preliminary visuals suggest modest declines in playoff efficiency. In the final phase, we will run paired tests and report effect sizes with confidence intervals.
 
 # Introduction
 - Playoffs often feature stronger defenses and higher pressure. These conditions may affect shooting outcomes. We ask whether field goal percentage and three point percentage differ between the two stages for the same players and whether regular season performance correlates with playoff performance.
@@ -46,6 +46,7 @@ source("00_requirements.R")
 - Group players by stage: We first organized the combined dataset by stage, separating players’ statistics into two groups: regular season and playoffs. This grouping allows us to compute summary statistics for each stage separately, rather than mixing all players together.
 - Calculate summary statistics: For each group, we calculated the following: The total number of players included (players_n), the average field-goal percentage (FG_mean) and its standard deviation (FG_sd), the average three-point percentage (TP_mean) and its standard deviation (TP_sd), these measures provide a concise overview of shooting performance and variability for each stage.
 - Display results in a table: Finally, the summary statistics were presented in a formatted table within the report. This table allows us to quickly compare overall shooting efficiency and variability between the regular season and playoffs, making it easy to see whether shooting tends to improve, decline, or remain consistent across stages.
+
 
 
 
