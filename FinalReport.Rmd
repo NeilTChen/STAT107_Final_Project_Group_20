@@ -22,9 +22,10 @@ source("00_requirements.R")
 
 # Data and Cleaning
 - The datasets are Regular Season.csv and Playoffs.csv. Cleaning and variable standardization are performed in the separate R Markdown file 11_DataCleaning.Rmd.
-```{r child="11_DataCleaning.Rmd", echo=FALSE, warning=FALSE, message=FALSE}
-
-```
+- Step 1: Load the datasets. First, both the regular-season and playoff datasets were imported into the workspace. After loading them, we checked the structure of each dataset to understand what variables they included, how the data were formatted, and whether there were any immediate issues. This gave us a baseline understanding of the raw data before making any changes.
+- Step 2: Keep only the relevant columns. Next, we reduced each dataset to just the variables needed for the analysis. This step removed extra or unnecessary columns so that the remaining datasets contained only the player identity, team, playing time, scoring totals, and shooting statistics we planned to work with.
+- Step 3: Rename columns for consistency. Because the column names in the two datasets were not fully consistent, all selected variables were renamed to follow the same naming style. This standardization ensured that both datasets used identical labels, which is important for combining them later and for avoiding confusion during analysis.
+- Step 4: Combine the datasets. Finally, the cleaned regular-season and playoff datasets were merged into a single dataset. A new variable was added to label each observation as either “Regular” or “Playoffs,” making it possible to compare player performance across the two contexts within one unified dataset.
 
 # Visualization
 - We include the visualization plots that visualize the distribution of shooting efficiency, paired boxplots for player-level performance comparison, and correlation scatter plots between regular and playoff FG%. The plotting functions are defined in 02_funct_Plots.R and are used inside the visualization script.
@@ -51,6 +52,7 @@ desc <- combined %>%
 # Display results as a formatted table in the report
 knitr::kable(desc, caption = "Summary statistics for FG% and 3P% by stage")
 ```
+
 
 
 
