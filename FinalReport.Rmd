@@ -28,10 +28,10 @@ source("00_requirements.R")
 - Step 4: Combine the datasets. Finally, the cleaned regular-season and playoff datasets were merged into a single dataset. A new variable was added to label each observation as either “Regular” or “Playoffs,” making it possible to compare player performance across the two contexts within one unified dataset.
 
 # Visualization
-- We include the visualization plots that visualize the distribution of shooting efficiency, paired boxplots for player-level performance comparison, and correlation scatter plots between regular and playoff FG%. The plotting functions are defined in 02_funct_Plots.R and are used inside the visualization script.
-```{r child="31_DataVisualization.Rmd", echo=FALSE, warning=FALSE, message=FALSE}
-
-```
+- We include the visualization plots that visualize the distribution of shooting efficiency, paired boxplots for player-level performance comparison, and correlation scatter plots between regular and playoff FG%. The - 
+- Distribution of Shooting Efficiency: The first set of plots shows histograms of field-goal percentage for the regular season and the playoffs. These visualizations allow us to compare how player shooting efficiency is spread out in each setting. By looking at the shapes of the two distributions, we can see whether players tend to shoot better, worse, or similarly in the postseason compared to the regular season.
+- Paired Comparison of Performance: Next, we created a paired boxplot using only players who appear in both datasets. This visualization places regular-season and playoff field-goal percentages side by side for the same individuals. Comparing the two boxplots helps us understand whether there is a common shift in performance—such as a general decrease or increase in shooting efficiency—from the regular season to the playoffs.
+- Correlation of Performance. Finally, we produced a scatterplot that compares each player’s regular-season field-goal percentage to their playoff field-goal percentage. Each point represents one player, showing both values together. This plot helps reveal whether players who shoot well in the regular season also tend to shoot well in the playoffs, and how consistent shooting performance is across the two contexts.
 
 # Summary Statistics
 - The table below summarizes group level statistics (mean and standard deviation) for FG% and 3P% across both stages. These statistics are based on the combined dataset that was created and prepared in the 11_DataCleaning.Rmd file.
@@ -52,6 +52,7 @@ desc <- combined %>%
 # Display results as a formatted table in the report
 knitr::kable(desc, caption = "Summary statistics for FG% and 3P% by stage")
 ```
+
 
 
 
