@@ -23,6 +23,6 @@ __02_funct_Plots.R__
     - correlation scatterplots with regression and reference lines.
 - This file is sourced by the visualization R Markdown script and allows consistent, reusable plotting across the project.
 
-__11_DataCleaing.Rmd__
+__11_DataCleaning.Rmd__
 - Loads the regular-season and playoff datasets, selects the relevant shooting variables, standardizes column names, and combines both datasets into a unified cleaned dataset used for all later analysis.
 
