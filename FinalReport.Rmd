@@ -60,4 +60,5 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
 - Calculate summary statistics: For each group, we calculated the following: The total number of players included (players_n), the average field-goal percentage (FG_mean) and its standard deviation (FG_sd), the average three-point percentage (TP_mean) and its standard deviation (TP_sd), these measures provide a concise overview of shooting performance and variability for each stage.
 - Display results in a table: Finally, the summary statistics were presented in a formatted table within the report. This table allows us to quickly compare overall shooting efficiency and variability between the regular season and playoffs, making it easy to see whether shooting tends to improve, decline, or remain consistent across stages.
 
-
+# Team Contributions
+- Seonghee Seo: Contributed to the 00_requirements.R and 11_DataCleaning.Rmd files, the report submitted for the Half-Way Project Evaluation, and the final README file. Also reviewed the project files for typos and wording issues and made corrections where needed.
