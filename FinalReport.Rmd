@@ -29,29 +29,36 @@ source("00_requirements.R")
 
 # Visualization
 - We include the visualization plots that visualize the distribution of shooting efficiency, paired boxplots for player-level performance comparison, and correlation scatter plots between regular and playoff FG%.
-- Distribution of Shooting Efficiency: The first set of plots shows histograms of field-goal percentage for the regular season and the playoffs. These visualizations allow us to compare how player shooting efficiency is spread out in each setting. By looking at the shapes of the two distributions, we can see whether players tend to shoot better, worse, or similarly in the postseason compared to the regular season.
-- Paired Comparison of Performance: Next, we created a paired boxplot using only players who appear in both datasets. This visualization places regular-season and playoff field-goal percentages side by side for the same individuals. Comparing the two boxplots helps us understand whether there is a common shift in performance—such as a general decrease or increase in shooting efficiency—from the regular season to the playoffs.
-- Correlation of Performance. Finally, we produced a scatterplot that compares each player’s regular-season field-goal percentage to their playoff field-goal percentage. Each point represents one player, showing both values together. This plot helps reveal whether players who shoot well in the regular season also tend to shoot well in the playoffs, and how consistent shooting performance is across the two contexts.
+
+- Distribution of Shooting Efficiency: The first set of plots shows histograms of field-goal percentage for the regular season and the playoffs. These visualizations allow us to compare how player shooting efficiency is spread out in each setting. Both distributions are unimodal and generally bell shaped. The Playoffs distribution appears more concentrated around 50%, which implies that the sample of players who participate in the playoffs is slightly more consistent in FG%. Both plots show spikes around 0% and 100%, which can be explained by players taking one shot and missing it (0%), or making it (100%). 
+![Field goald ditribution comparison](fg_distribution_histograms.png)
+\newpage
+- Paired Comparison of Performance: Next, we created a paired boxplot using only players who appear in both datasets. This visualization places regular-season and playoff field-goal percentages side by side for the same individuals. From this paired boxplot, we can see that player FG% is mostly stable between the regular season and the playoffs, with almost no change in the median. However, many players experience slight increases or decreases in their shooting. 
+![Paired boxplots for player-level performance](paired_fg_boxplot.png)
+\newpage
+- Correlation of Performance. Next, we produced a scatterplot that compares each player’s regular-season field-goal percentage to their playoff field-goal percentage. Each point represents one player, showing both values together. From the scatter plot, we can conclude that a player's regular season FG% is a moderate predictor of their playoff FG%, which is shown by the positive correlation. However, the large scatter indicates that many players' efficiency changes a lot, which indicates a high level of variability in performance under pressure. 
+![Scatterplot comparing teams' regular season to playoff FG%](fg_correlation_scatter.png)
+\newpage
+- Team Field Goal and Three Point Percentage Comparison. Next, we produced two paired boxplots comparing the distribution of field goal and three point percentage for Playoff teams (blue) versus Non-Playoff teams (red). Looking at the plots, we see that playoff teams generally have a slightly higher median FG% than Non-Playoff teams, but the performance distributions have a lot of overlap. However, Playoff teams show a more distinct advantage in three point percentage with a higher pmedian and more consistent performance across the middle 50% of teams.
+![Paired boxplots for FG%](paired_fg_boxplot.png)
+- Three-Point Percentage vs. Field Goal Percentage by Team Status. Finally, we created a scatterplot that shows the relationship between FG% (x-axis) and 3P% (y-axis) for all teams. The dashed line indicates a positive correlation between FG% and 3P%. Playoff teams tend to be clustered towards the upper right quadrant of the plot, indicating a higher FG% and 3P%. Non-playoff teams are scattered more broadly, but several are located in the lower left, indicating a lower FG% and 3P%. 
+![Scatter Plot FG% vs. 3P%](team_fg_vs_tp_scatter.png)
+\newpage
 
 # Statistical Analysis
 - Step 1: Identify playoff teams. We first loaded the datasets, then extracted a list of all teams that appear in the playoff dataset. This allows us to distinguish which teams made the playoffs and which did not, which is necessary for comparing team shooting performance between the two groups.
 - Step 2: Aggregate regular-season data to the team level. Player-level statistics were summed to produce team-level totals for field-goals made and attempted, as well as three-pointers made and attempted. From these totals, team field-goal percentage and three-point percentage were calculated. This aggregation converts individual player performance into overall team shooting efficiency.
 - Step 3: Classify teams as Playoff or Non-Playoff. Each team was labeled based on whether it appeared in the playoffs. This classification created two groups: “Playoff” and “Non-Playoff”, for subsequent statistical comparisons. Only the relevant columns (team name, playoff status, and shooting percentages) were kept for clarity.
 - Step 4: Organize data for comparison. We separated the shooting percentages into two groups for each metric: field goal percentage (FG%) and three point percentage (3P%). Each metric was split into values for playoff teams and non-playoff teams. This organization allows us to compare the average performance of playoff and non-playoff teams.
-- Step 5: Compute Cohen's d. Cohen’s d was calculated for FG% and 3P% to measure the effect size of the difference between playoff and non-playoff teams. Cohen’s d quantifies how large the difference is in standard deviation units, giving context beyond just statistical significance.
-- Step 6: Conduct t-tests. Unpaired t-tests (Welch’s t-test, assuming unequal variances) were performed to determine whether differences in FG% and 3P% between playoff and non-playoff teams are statistically significant. This step provides formal evidence of whether playoff teams shoot more efficiently than non-playoff teams.
+- Step 5: Conduct t-tests. Unpaired t-tests (Welch’s t-test, assuming unequal variances) were performed to determine whether differences in FG% and 3P% between playoff and non-playoff teams are statistically significant. This step provides formal evidence of whether playoff teams shoot more efficiently than non-playoff teams.
+  - From the t-test comparing FG%, we get a t-statistic of 1.4963. This yields a p-value of 0.1458, which means that it is not statistically significant. 
+  - From the t-test comparing 3P%, we get a t-statistic of 1.0121. This yields a p-value of 0.3218, which means that is is also not statistically significant. 
+- Step 6: Compute Cohen's d. Cohen’s d was calculated for FG% and 3P% to measure the effect size of the difference between playoff and non-playoff teams. Cohen’s d quantifies how large the difference is in standard deviation units, giving context beyond just statistical significance.
+  - The Cohen's d value for FG% was 0.545, which represents a medium effect size. This means that the average Playoff team's FG% is slightly more than half a standard deviation higher than the average Non-Playoff team's FG%. 
+  - The Cohen's d value for 3P% was 0.369, which represents a small to medium effect size. The difference in 3P% between the two groups is present but less pronounced than the FG% difference, suggesting that the advantage in three point shooting is smaller compared to the variation in team 3P%. 
 - Step 7: Summarize and save results. The results were summarized by printing the mean shooting percentages, t-test results, and Cohen’s d for each metric. Finally, the team-level data with shooting percentages and playoff status were saved to a CSV file for reporting or further analysis.
 
 # Summary Statistics
 - Group players by stage: We first organized the combined dataset by stage, separating players’ statistics into two groups: regular season and playoffs. This grouping allows us to compute summary statistics for each stage separately, rather than mixing all players together.
 - Calculate summary statistics: For each group, we calculated the following: The total number of players included (players_n), the average field-goal percentage (FG_mean) and its standard deviation (FG_sd), the average three-point percentage (TP_mean) and its standard deviation (TP_sd), these measures provide a concise overview of shooting performance and variability for each stage.
 - Display results in a table: Finally, the summary statistics were presented in a formatted table within the report. This table allows us to quickly compare overall shooting efficiency and variability between the regular season and playoffs, making it easy to see whether shooting tends to improve, decline, or remain consistent across stages.
-
-
-
-
-
-
-
-
-
